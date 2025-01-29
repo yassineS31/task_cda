@@ -1,5 +1,4 @@
 <?php
-include '../env.php';
 
 function connexion() {
     return new PDO
