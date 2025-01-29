@@ -4,7 +4,7 @@
  * @param PDO $bdd
  * @param string $name 
  */
-function addCategory($bdd, $name)
+function addCategory(PDO $bdd, string $name): void
 {
     //Requête
     $requete = "INSERT INTO category(name) VALUE(?)";
@@ -26,7 +26,7 @@ function addCategory($bdd, $name)
  * @param int $id
  * @return void
  */
-function updateCategory($bdd, $name, $id): void
+function updateCategory(PDO $bdd, string $name, int $id): void
 {
     //Requête
     $requete = "UPDATE category SET name=? WHERE id_category=?";
@@ -49,7 +49,7 @@ function updateCategory($bdd, $name, $id): void
  * @param int $id
  * @return void
  */
-function deleteCategory($bdd, $id): void
+function deleteCategory(PDO $bdd, int $id): void
 {
     //Requête
     $requete = "DELETE FROM category WHERE id_category = ?";
@@ -70,7 +70,7 @@ function deleteCategory($bdd, $id): void
  * @param string $name
  * @return array|null
  */
-function getCategoryByName($bdd, $name): array|null
+function getCategoryByName(PDO $bdd, string $name): array|null
 {
     //Requête
     $requete = "SELECT id_category, name FROM category WHERE name=?";
@@ -92,7 +92,7 @@ function getCategoryByName($bdd, $name): array|null
  * @param PDO $bdd 
  * @return array|null
  */
-function getAllCategory($bdd): array|null
+function getAllCategory(PDO $bdd): array|null
 {
     //Requête
     $requete = "SELECT id_category, name FROM category";
