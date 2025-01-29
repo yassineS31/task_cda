@@ -24,19 +24,18 @@ function addCategory(PDO $bdd, string $name): void
 /**
  * @param PDO $bdd 
  * @param string $name 
- * @param int $id
  * @return void
  */
-function updateCategory(PDO $bdd, string $name, int $id): void
+function updateCategory(PDO $bdd, string $name): void
 {
     //Requête
-    $requete = "UPDATE category SET name=? WHERE id_category=?";
+    $requete = "UPDATE category SET name=? WHERE name=?";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
         //Associer les paramètres (?)
         $req->bindParam(1, $name, PDO::PARAM_STR);
-        $req->bindParam(2, $id, PDO::PARAM_INT);
+        $req->bindParam(2, $name, PDO::PARAM_STR);
         //Exécuter la requête
         $req->execute();
     } catch (Exception $e) {
@@ -47,18 +46,18 @@ function updateCategory(PDO $bdd, string $name, int $id): void
 
 /**
  * @param PDO $bdd 
- * @param int $id
+ * @param string $name
  * @return void
  */
-function deleteCategory(PDO $bdd, int $id): void
+function deleteCategory(PDO $bdd, string $name): void
 {
     //Requête
-    $requete = "DELETE FROM category WHERE id_category = ?";
+    $requete = "DELETE FROM category WHERE name = ?";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
         //Associer les paramètres (?)
-        $req->bindParam(1, $id, PDO::PARAM_INT);
+        $req->bindParam(1, $name, PDO::PARAM_STR);
         //Exécuter la requête
         $req->execute();
     } catch (Exception $e) {
