@@ -2,7 +2,8 @@
 
 /**
  * @param PDO $bdd
- * @param string $name 
+ * @param string $name
+ * @return void 
  */
 function addCategory(PDO $bdd, string $name): void
 {
