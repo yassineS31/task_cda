@@ -76,6 +76,7 @@ function getAccountByEmail(PDO $bdd, string $email): array|null|string {
         return $data;
     } catch (Exception $e) {
         echo "Erreur : " . $e->getMessage();
+        return null;
     }
 }
 
@@ -93,5 +94,6 @@ function getAllAccount(PDO $bdd): array|null|string{
         return $data;
     } catch (Exception $e) {
         echo "Erreur : " . $e->getMessage();
+        return null;
     }
 }
