@@ -2,9 +2,12 @@
 
 include './vendor/autoload.php';
 include './env.php';
+include './controller/accountController.php';
 include './utils/connexion.php';
-
-include 'controller/categorieController.php';
+include './vue/header.php';
+// include 'controller/categorieController.php';
+include './vue/footer.php';
 $bdd = connexion();
-ajouterCategory($bdd);
+ajouterUtilisateur($bdd);
+// ajouterCategory($bdd);
 
