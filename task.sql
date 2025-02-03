@@ -50,3 +50,6 @@ ADD CONSTRAINT fk_add_category
 FOREIGN KEY(id_category)
 REFERENCES category(id_category)
 ON DELETE CASCADE;
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123'
