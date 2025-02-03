@@ -1,14 +1,15 @@
 <?php
-
-
-function addCategory($bdd, $name){
+function addTask($bdd, $firstname,$lastname,$email,$password){
     //Requête
-    $requete = "INSERT INTO category(name) VALUE(?)";
+    $requete = "INSERT INTO account(firstname,lastname,email,password) VALUES(?,?,?,?)";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
         //Associer les paramètres (?)
-        $req->bindParam(1,$name, PDO::PARAM_STR);
+        $req->bindParam(1,$firstname, PDO::PARAM_STR);
+        $req->bindParam(2,$lastname, PDO::PARAM_STR);
+        $req->bindParam(3,$email, PDO::PARAM_STR);
+        $req->bindParam(4,$password, PDO::PARAM_STR);
         //Exécuter la requête
         $req->execute();
     } catch (Exception $e) {
@@ -16,25 +17,10 @@ function addCategory($bdd, $name){
     }
 }
 
-function updateCategory($bdd, $name, $id){
-    //Requête
-    $requete = "UPDATE category SET name=? WHERE id_category=?";
-    try {
-        //Préparation de la requête
-        $req = $bdd->prepare($requete);
-        //Associer les paramètres (?)
-        $req->bindParam(1,$name, PDO::PARAM_STR);
-        $req->bindParam(2,$id, PDO::PARAM_INT);
-        //Exécuter la requête
-        $req->execute();
-    } catch (Exception $e) {
-        echo "Erreur" . $e->getMessage();
-    }
-}
 
-function deleteCategory($bdd, $name, $id){
+function deleteAccount($bdd, $id){
     //Requête
-    $requete = "DELETE FROM category WHERE id_category = ?";
+    $requete = "DELETE FROM account WHERE id_account = ?";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
@@ -47,26 +33,32 @@ function deleteCategory($bdd, $name, $id){
     }
 }
 
-function getCategoryByName($bdd, $name){
+
+// Update
+
+
+function updateAccount($bdd, $firstname,$lastname,$email,$password){
     //Requête
-    $requete = "SELECT id_category, name FROM category WHERE name=?";
+    $requete = "UPDATE account SET firstname= ?,lastname=?,email =?, password= ? WHERE id_account=?";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
         //Associer les paramètres (?)
-        $req->bindParam(1,$name, PDO::PARAM_STR);
+        $req->bindParam(1,$firstname, PDO::PARAM_STR);
+        $req->bindParam(2,$lastname, PDO::PARAM_STR);
+        $req->bindParam(3,$email, PDO::PARAM_STR);
+        $req->bindParam(4,$password, PDO::PARAM_STR);
         //Exécuter la requête
         $req->execute();
-        $data = $req->fetch(PDO::FETCH_ASSOC);
-        return $data;
     } catch (Exception $e) {
         echo "Erreur" . $e->getMessage();
     }
 }
 
-function getAllCategory($bdd){
+
+function getAllAccount($bdd){
     //Requête
-    $requete = "SELECT id_category, name FROM category";
+    $requete = "SELECT * FROM account";
     try {
         //Préparation de la requête
         $req = $bdd->prepare($requete);
@@ -78,3 +70,5 @@ function getAllCategory($bdd){
         echo "Erreur" . $e->getMessage();
     }
 }
+
+?>
