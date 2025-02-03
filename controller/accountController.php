@@ -2,6 +2,10 @@
 include './model/account.php';
 
 
+
+// INSCRIPTION
+
+
 /*
 *@method Créer un nouveau compte utilisateur
 *@param PDO $bdd
@@ -46,6 +50,42 @@ function signUp(PDO $bdd):string{
     return '';
 }
 
+
+
+// CONNEXION
+
+function signIn(PDO $bdd):string{
+    //Vérifier qu'on reçoit le formulaire
+    if(isset($_POST['submitSignIn'])){
+        //Vérifier les champs vide
+        if(empty($_POST['email']) || empty($_POST['password'])){
+            //Retourne le message d'erreur
+            return "Veuillez remplir les champs !";
+        }
+        // Netoyer les données : 
+        $email = sanitize($_POST['email']);
+        $password = sanitize($_POST['password']);
+        // Verifier si l'utilisateur existe :
+            if(!getAccountByEmail($bdd,$email)){
+                return "L'utilisateur n'existe pas !";
+            }
+        // Verifier le mot de passe :
+            $getpassword =getAccountByEmail($bdd,$email);
+            if(!password_verify($password,$getpassword['password'])){
+                return "Le mot de passe est incorrect ! ";
+            }
+            // Activation de la session start
+            session_start();
+             $_SESSION['lastname']= $getpassword['lastname'];
+             $_SESSION['firstname']=$getpassword['firstname'];
+             $_SESSION['email'] = $getpassword['email'];
+             // Afficher message de réussite de connexion :
+             return "Connexion réussie ! Bienvenue ". $_SESSION['lastname'] ." ". $_SESSION['firstname'];
+            
+    }
+    return '';
+}
+
 function displayAccounts(PDO $bdd){
     //Récupération de la liste des utilisateurs
     $data = getAllAccount($bdd);
@@ -57,8 +97,10 @@ function displayAccounts(PDO $bdd){
     return $listUsers;
 }
 
+
 function renderAccounts(PDO $bdd){
     $message = signUp($bdd);
     $listUsers = displayAccounts($bdd);
+    $message2 = signIn($bdd);
     include "./vue/account.php";
 }
