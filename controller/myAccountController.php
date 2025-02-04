@@ -1,15 +1,12 @@
 <?php
 
-include './env.php';
-include './utils/connexion.php';
-include './utils/utils.php';
 
-if(!isset($_SESSION['lastname'])){
-    //On redirige si personne n'est connecté
-    header('location:index.php');
-    exit;
-}else{
-    header('location:viewMyAccount.php');
+function renderMyAccount(){
+    //Vérifier si l'utilisateur est connecté
+    if(!isset($_SESSION['id'])){
+        //Non connecté : je redirige vers l'accueil
+        header('location:/task/');
+        exit;
+    }
+    include './vue/viewMyAccount.php';
 }
-
-?>
