@@ -5,4 +5,5 @@
         <input type="text" name="name">
         <input type="submit" value="ajouter" name="submit">
     </form>
-    <?= $message ?>
+    <?php echo $message ?>
+    <?php echo $categoryList ?>

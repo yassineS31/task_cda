@@ -28,6 +28,13 @@ switch($path){
         renderHeader();
         renderAccounts($bdd);
         break;
+    case '/task/accueil':
+        // var_dump($_SESSION);
+        include './controller/headerController.php';
+        include 'controller/accountController.php';
+        renderHeader();
+        renderAccounts($bdd);
+        break;
     
     //Route pour pour la page mon compte
     case '/task/moncompte' :
@@ -36,6 +43,17 @@ switch($path){
         renderHeader();
         renderMyAccount();
         break;
+
+    //Route pour pour la page ajouter catégorie
+    case '/task/ajoutercategorie' :
+        include './controller/headerController.php';
+        include './controller/categorieController.php';
+        renderHeader();
+        renderCategories( $bdd);
+        // ajouterCategory($bdd);
+        // displayCategories($bdd);
+        break;
+
     //Route pour pour la page de deconnexion 
     case '/task/deconnexion' :
         include './controller/decoController.php';
