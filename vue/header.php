@@ -3,6 +3,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter une categorie</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body class="flex flex-col">
+<body>
+    <header>
+        <nav>
+            <a href="/task/accueil">Accueil</a>
+            <?php echo $nav ?>
+        </nav>
+        
+    </header>

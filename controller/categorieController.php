@@ -17,6 +17,29 @@ function ajouterCategory(PDO $bdd) {
             } 
         }
     }
-   
+    return'';
+}
+
+
+function displayCategories(PDO $bdd){
+    //Récupération de la liste des utilisateurs
+    $data = getAllCategory( $bdd);
+
+    $categoryList = "";
+    ob_start();
+     
+    foreach($data as $category){
+        $categoryList = $categoryList."<li><h2>".$category["name"] ."</h2></li>";
+    }
+    return $categoryList; 
+    
+    ob_get_clean();
+};
+
+
+
+function renderCategories(PDO $bdd){
+    $message = ajouterCategory($bdd);
+    $categoryList = displayCategories($bdd);
     include 'vue/addCategory.php';
 }
